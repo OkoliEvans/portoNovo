@@ -18,9 +18,9 @@
       <nav class="navBar">
         <ul class="navList">
           <li><a href="./index.html">Home</a></li>
-          <li><a href="./porfolio.html">Portfolio</a></li>
-          <li><a href="./register.html">Register</a></li>
-          <li><a href="./login.html">Login</a></li>
+          <li><a href=".porfolio">Portfolio</a></li>
+          <li><a href=".register">Register</a></li>
+          <li><a href=".login">Login</a></li>
         </ul>
 
         <!-- Dark mode button-->
@@ -43,11 +43,11 @@
       <!-- Typewriter Effect-->
       <div class="typewriter">
         <h1 class="intro">
-          Hi, meet Evans... the <br />
+          Hi, meet <span class="evans">Evans...</span>   <br/> I am a 
           <span
             class="text-type"
             data-wait="3000"
-            data-words='["frontend developer", "blockchain developer"]'
+            data-words='[" Frontend Developer.", " Blockchain Developer."]'
           >
           </span>
           <span class="blinker"></span>
@@ -115,11 +115,19 @@
         <div class="button">
           <button type="submit" id="signInBtn" class="btn">Sign in</button>
         </div>
+        <div class="button">
+          <button type="submit" id="logout" class="btn">Sign out</button>
+        </div>
+      </div>
+
+      <!-- ==== PORTFOLIO === -->
+      <div id="portfolio">
+
       </div>
 
       <!-- Contact -->
       <div class="contact">
-        <form action="https://formspree.io/f/mqkjlype" method="post">
+        <form action="https://formspree.io/f/mqkjlype" method="POST">
           <div id="fullName">
             <label for="name" class="fullname">Full name</label>
             <input
@@ -164,7 +172,7 @@
       </div>
     </div>
   </body>
-  
+
   <!--======== FIREBASE SQUAD ========-->
   <script type="module">
     // Import the functions you need from the SDKs you need

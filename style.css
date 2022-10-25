@@ -51,7 +51,7 @@ a:active {
   display: none;
 }
 
-span {
+.toggle {
   background-color: white;
   width: 30px;
   height: 3px;
@@ -155,11 +155,16 @@ span {
   height: 2rem;
   width: 100%;
   border: none;
-  background-color: lightslategray;
+  background-color: rgb(2, 7, 22);
   color: #fff;
   font-size: 16px;
   padding: 0.5rem;
   margin-top: 0.7rem;
+  border-radius: 10px;
+}
+
+.btn:active {
+  transform: translateY(1px);
 }
 
 /* media query */

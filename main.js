@@ -24,9 +24,9 @@ class Typewriter {
     this.words = words;
     this.wait = parseInt(wait, 10); //to base 10
     this.isDeleting = false;
-    this.type();
-    this.txt = "";
+    this.txt = '';
     this.wordIndex = 0;
+    this.type();
   }
 
   type() {
@@ -95,5 +95,5 @@ function init() {
 // dark mode selector
 function darkMode() {
   sun.classList.toggle('night');
-  alert('k');
+  alert('activated');
 }
