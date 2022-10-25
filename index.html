@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Lato:ital@0;1&family=Open+Sans&display=swap");
+    </style>
+    <script src="main.js" defer></script>
+    <title>Okoli Evans portfolio</title>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Nav Bar -->
+
+      <nav class="navBar">
+        <ul class="navList">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./porfolio.html">Portfolio</a></li>
+          <li><a href="./register.html">Register</a></li>
+          <li><a href="./login.html">Login</a></li>
+        </ul>
+
+        <!-- Dark mode button-->
+        <div class="darkBtnSelector">
+          <button
+            type="button"
+            class="sun"
+            id="sun"
+            onclick="darkMode()"
+          ></button>
+        </div>
+        <!-- Menu Toggler-->
+        <section class="toggleBtn">
+          <span class="toggle"></span>
+          <span class="toggle"></span>
+          <span class="toggle"></span>
+        </section>
+      </nav>
+
+      <!-- Typewriter Effect-->
+      <div class="typewriter">
+        <h1 class="intro">
+          Hi, meet Evans... the <br />
+          <span
+            class="text-type"
+            data-wait="3000"
+            data-words='["frontend developer", "blockchain developer"]'
+          >
+          </span>
+          <span class="blinker"></span>
+        </h1>
+      </div>
+
+      <!-- User Registration form-->
+      <div class="register">
+        <div class="signup">
+          <div class="name">
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Enter Full Name"
+              required
+            />
+          </div>
+          <div class="email">
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="e.g: john@email.com"
+              required
+            />
+          </div>
+          <div class="password">
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Enter password"
+              required
+            />
+          </div>
+  
+          <div class="button">
+            <button type="submit" id="signUpBtn" class="btn">Sign Up</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- User login -->
+      <div class="login">
+        <div class="email">
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="e.g: john@email.com"
+            required
+          />
+        </div>
+        <div class="password">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Enter password"
+            required
+          />
+        </div>
+
+        <div class="button">
+          <button type="submit" id="signInBtn" class="btn">Sign in</button>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="contact">
+        <form action="https://formspree.io/f/mqkjlype" method="post">
+          <div id="fullName">
+            <label for="name" class="fullname">Full name</label>
+            <input
+              type="text"
+              name="fullname"
+              id="name"
+              placeholder="e.g John"
+              required
+            />
+          </div>
+
+          <div id="emailDiv">
+            <label for="email" class="email">Email</label>
+            <input
+              type="email"
+              name="Email"
+              id="email"
+              placeholder="e.g john@email.com"
+              required
+            />
+          </div>
+
+          <div id="textareaDiv">
+            <label for="message" class="message">Your message</label><br />
+            <textarea
+              type="text"
+              id="textArea"
+              name="message"
+              placeholder="type your message here"
+              required
+            ></textarea>
+          </div>
+          <div>
+            <button id="button" type="submit" class="btn">Send</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- footer -->
+      <div class="footer">
+        <div class="social"></div>
+      </div>
+    </div>
+  </body>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
+    import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword, signInWithEmailAndPassword
+    } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-auth.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAEip9k4viJUhnhY_D56C0kNFqGDZc57t8",
+      authDomain: "authenticatex-686c9.firebaseapp.com",
+      databaseURL: "https://authenticatex-686c9-default-rtdb.firebaseio.com",
+      projectId: "authenticatex-686c9",
+      storageBucket: "authenticatex-686c9.appspot.com",
+      messagingSenderId: "531902953449",
+      appId: "1:531902953449:web:38ed2a126ea17278887d78",
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth();
+
+    //Register function
+    signUpBtn.addEventListener("click", (e) => {
+      let name = document.getElementById('name').value;
+      let email = document.getElementById("email").value;
+      let password = document.getElementById("password").value;
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          //signed in
+          const user = userCredential.user;
+
+          //set to realtime database
+          set(ref(database, 'users/' + user.uid), {
+            name: name,
+            email: email
+          })
+
+          alert("user created");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+
+          alert(errorMessage);
+        });
+    });
+
+    //Log in function
+    signInBtn.addEventListener('click', (e) => {
+      let email = document.getElementById("email").value;
+      let password = document.getElementById("password").value;
+
+      signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        //signed in
+        const user = userCredential.user;
+        
+        //update user data
+        const loginDate = new Date();
+        update(ref(database, 'user/' + user.uid), {
+          last_login : loginDate,
+
+        })
+        alert('logged in')
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        alert(errorMessage);
+      });
+
+    });
+
+  </script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

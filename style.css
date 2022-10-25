@@ -1,0 +1,214 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  font: rgb(230, 224, 224);
+  font-family: "Lato", sans-serif;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 5rem;
+  padding: 0 7rem;
+  background: rgb(0, 0, 31);
+}
+
+.navList {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+li {
+  transition: 0.7s ease;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  font-size: 18px;
+  color: white;
+  padding-bottom: 0.8rem;
+}
+
+a:hover {
+  border-bottom: 1px solid white;
+}
+
+a:active {
+  color: rgb(173, 161, 161);
+}
+
+.toggleBtn {
+  cursor: pointer;
+  display: none;
+}
+
+span {
+  background-color: white;
+  width: 30px;
+  height: 3px;
+  display: block;
+  margin: 5px 0;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Dark mode styling */
+.darkBtnSelector {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 6px;
+  background-color: gray;
+  transform: translate(-50%, -50%);
+  margin-top: 1.8rem;
+  margin: 0 2rem;
+}
+
+/* Typewriter effect styling*/
+.typewriter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: 0 3rem;
+}
+
+.blinker {
+  height: 2rem;
+  width: 0.5rem;
+  background-color: #fff;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0% {
+    border-right: 0.2rem solid black;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Contact form */
+.contact {
+  height: 25rem;
+  width: 25rem;
+  margin: 2rem 5rem;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#fullName,
+#emailDiv,
+#textareaDiv {
+  margin: 0.7rem;
+}
+
+#name,
+#email,
+#password,
+#username {
+  height: 2rem;
+  width: 100%;
+}
+
+.login {
+  height: 25rem;
+  width: 25rem;
+  margin: 2rem 5rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup {
+  height: 8rem;
+  width: 25rem;
+  margin: 2rem 5rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#textArea {
+  width: 100%;
+  height: 11rem;
+  font-family: "calibri";
+  font-size: 1.1rem;
+}
+
+.btn {
+  height: 2rem;
+  width: 100%;
+  border: none;
+  background-color: lightslategray;
+  color: #fff;
+  font-size: 16px;
+  padding: 0.5rem;
+  margin-top: 0.7rem;
+}
+
+/* media query */
+@media screen and (max-width: 800px) {
+  nav {
+    padding: 0rem;
+    align-items: center;
+  }
+
+  a:hover {
+    border-bottom: none;
+    opacity: 0.7;
+  }
+
+  .toggleBtn {
+    display: block;
+    margin-left: 2rem;
+  }
+
+  .toggleBtn.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .toggleBtn.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .toggleBtn.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .navList {
+    position: fixed;
+    left: -100%;
+    top: 80px;
+    gap: 0;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+    background-color: rgb(13, 13, 46);
+    padding-bottom: 1.3rem;
+  }
+
+  li {
+    padding: 0.8rem;
+  }
+
+  .navList.active {
+    left: 0;
+  }
+}
