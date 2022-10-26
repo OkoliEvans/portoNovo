@@ -93,7 +93,23 @@ function init() {
 
 
 // dark mode selector
+let sunBtn = document.getElementById('sun');
+let dark = document.querySelector('.darkToggle');
+
+sunBtn.addEventListener('click', darkMode);
 function darkMode() {
-  sun.classList.toggle('night');
+  dark.classList.toggle('night');
   alert('activated');
 }
+
+//===== SIGN-UP THANK YOU CLOSE POP UP ======
+let okBtn = document.querySelector('#okBtn');
+let popup = document.querySelector('.popup');
+
+okBtn.addEventListener('click', closePopup);
+function closePopup() {
+  popup.classList.remove("open-popup")
+};
+
+
+//====== TWITTER FEED API fetch =======

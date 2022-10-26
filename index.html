@@ -24,14 +24,10 @@
         </ul>
 
         <!-- Dark mode button-->
-        <div class="darkBtnSelector">
-          <button
-            type="button"
-            class="sun"
-            id="sun"
-            onclick="darkMode()"
-          ></button>
+        <div class="darkToggle">
+          <button type="button" class="sun" id="sun"></button>
         </div>
+
         <!-- Menu Toggler-->
         <section class="toggleBtn">
           <span class="toggle"></span>
@@ -43,7 +39,8 @@
       <!-- Typewriter Effect-->
       <div class="typewriter">
         <h1 class="intro">
-          Hi, meet <span class="evans">Evans...</span>   <br/> I am a 
+          Hi, meet <span class="evans">Evans...</span> <br />
+          I am a
           <span
             class="text-type"
             data-wait="3000"
@@ -55,40 +52,53 @@
       </div>
 
       <!-- User Registration form-->
-      <div class="register">
-        <div class="signup">
-          <div class="name">
-            <input
-              type="text"
-              name="name"
-              id="name"
-              placeholder="Enter Full Name"
-              required
-            />
-          </div>
-          <div class="email">
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="e.g: john@email.com"
-              required
-            />
-          </div>
-          <div class="password">
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Enter password"
-              required
-            />
-          </div>
-
-          <div class="button">
-            <button type="submit" id="signUpBtn" class="btn">Sign Up</button>
-          </div>
+      <div class="signup">
+        <div class="name">
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Enter Full Name"
+            required
+          />
         </div>
+        <div class="email">
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="e.g: john@email.com"
+            required
+          />
+        </div>
+        <div class="password">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Enter password"
+            required
+          />
+        </div>
+
+        <div class="button">
+          <button type="submit" id="signUpBtn" class="btn">Sign Up</button>
+        </div>
+      </div>
+
+      <!-- === SUCCESS POPUP ===-->
+      <div class="popup">
+        <img src="./images/download.png" alt="tick" id="tick" />
+        <h2 class="thanks">Thank You!</h2>
+        <p class="thanksMsg">Your details have been successfully submitted.</p>
+        <button
+          type="button"
+          class="thanksBtn"
+          id="okBtn"
+          onclick="closePopup()"
+        >
+          OK
+        </button>
       </div>
 
       <!-- User login -->
@@ -121,9 +131,7 @@
       </div>
 
       <!-- ==== PORTFOLIO === -->
-      <div id="portfolio">
-
-      </div>
+      <div id="portfolio"></div>
 
       <!-- Contact -->
       <div class="contact">
@@ -166,6 +174,22 @@
         </form>
       </div>
 
+      <!--=== TWITTER FEEDS ====-->
+      <div class="tweets">
+        <a
+          class="twitter-timeline"
+          data-width="700"
+          data-height="1000"
+          href="https://twitter.com/OkoliEvans?ref_src=twsrc%5Etfw"
+          >Tweets by OkoliEvans</a
+        >
+        <script
+          async
+          src="https://platform.twitter.com/widgets.js"
+          charset="utf-8"
+        ></script>
+      </div>
+
       <!-- footer -->
       <div class="footer">
         <div class="social"></div>
@@ -188,7 +212,7 @@
       createUserWithEmailAndPassword,
       signInWithEmailAndPassword,
       onAuthStateChanged,
-      signOut
+      signOut,
     } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-auth.js";
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
@@ -214,6 +238,7 @@
       let name = document.getElementById("name").value;
       let email = document.getElementById("email").value;
       let password = document.getElementById("password").value;
+      let popup = document.querySelector(".popup");
 
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -226,7 +251,8 @@
             email: email,
           });
 
-          alert("user created");
+          //open thank you popup
+          popup.classList.add("open-popup");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -264,27 +290,27 @@
     //user authentication during log in
     const user = auth.currentUser;
     onAuthStateChanged(auth, (user) => {
-      if(user) {
+      if (user) {
         //user is signed in
         const uid = user.uid;
       } else {
         //user is signed out
-
       }
     });
 
-    logout.addEventListener('click', (e) => {
+    logout.addEventListener("click", (e) => {
+      signOut(auth)
+        .then(() => {
+          //signed out
+          alert("signed out.");
+        })
+        .catch((error) => {
+          //error occurred
+          const errorCode = error.code;
+          const errorMessage = error.message;
 
-      signOut(auth).then(() => {
-        //signed out
-        alert('signed out.')
-      }).catch((error) => {
-        //error occurred
-        const errorCode = error.code;
-        const errorMessage = error.message;
-
-        alert(errorMessage);
-      });
+          alert(errorMessage);
+        });
     });
   </script>
 </html>
